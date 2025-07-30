@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="796232cb-948c-4e64-99cd-9ae64d3f82f4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/alura/bytebank/domain/conta/ContaDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/alura/bytebank/domain/conta/ContaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/alura/bytebank/domain/conta/ContaDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/alura/bytebank/domain/conta/ContaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/alura/bytebank/domain/conta/ContaService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/com/alura/bytebank/domain/conta/ContaService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/alura/bytebank/domain/conta/ContaService.class" afterDir="false" />
     </list>

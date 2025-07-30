@@ -40,18 +40,33 @@ public class ContaDAO {
         }
     }
 
-    public Conta buscar(Integer IdConta){
+    public Conta buscarPorNumero(Integer numeroConta) {
         String sql = "SELECT numero, saldo, cliente_nome, cliente_cpf, cliente_email FROM conta WHERE numero = ?";
 
-        try{
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, IdConta);
-            preparedStatement.execute();
+        try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setInt(1, numeroConta);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                Integer numero = resultSet.getInt("numero");
+                BigDecimal saldo = resultSet.getBigDecimal("saldo");
+                String nome = resultSet.getString("cliente_nome");
+                String cpf = resultSet.getString("cliente_cpf");
+                String email = resultSet.getString("cliente_email");
+
+                DadosCadastroCliente dadosCadastroCliente = new DadosCadastroCliente(nome, cpf, email);
+                Cliente cliente = new Cliente(dadosCadastroCliente);
+                Conta conta = new Conta(numero, cliente);
+                //conta.setSaldo(saldo); // se necessário
+                return conta;
+            }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Erro ao buscar conta por número", e);
         }
-        return null;
+
+        return null; // ou lançar exceção se preferir
     }
+
 
     public Set<Conta> listar() {
         Set<Conta> contas = new HashSet<>();

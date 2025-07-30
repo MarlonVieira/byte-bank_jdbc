@@ -23,7 +23,6 @@ public class ContaService {
     private Set<Conta> contas = new HashSet<>();
 
     public Set<Conta> listarContasAbertas() {
-//        return contas;
         Connection conn = connection.recuperarConexao();
         return new ContaDAO(conn).listar();
     }
@@ -90,11 +89,6 @@ public class ContaService {
 
     private Conta buscarContaPorNumero(Integer numero) {
         Connection conn = connection.recuperarConexao();
-        return new ContaDAO(conn).buscar(numero);
-//        return contas
-//                .stream()
-//                .filter(c -> c.getNumero() == numero)
-//                .findFirst()
-//                .orElseThrow(() -> new RegraDeNegocioException("Não existe conta cadastrada com esse número!"));
+        return new ContaDAO(conn).buscarPorNumero(numero);
     }
 }

@@ -16,7 +16,7 @@ public class ContaService {
 
     private ConnectionFactory connection;
 
-    ContaService() {
+    public ContaService() {
         this.connection = new ConnectionFactory();
     }
 
@@ -30,6 +30,25 @@ public class ContaService {
         var conta = buscarContaPorNumero(numeroDaConta);
         return conta.getSaldo();
     }
+
+//    public void salvar(DadosAberturaConta dadosDaConta) throws SQLException {
+//        var cliente = new Cliente(dadosDaConta.dadosCliente());
+//        var conta = new Conta(dadosDaConta.numero(), BigDecimal.ZERO, cliente, true);
+//
+//        String sql = "INSERT INTO conta (numero, saldo, cliente_nome, cliente_cpf, cliente_email)"+
+//                "VALUES (?, ?, ?, ?, ?)";
+//
+//
+//        PreparedStatement preparedStatement = conn.prepareStatement(sql);
+//        preparedStatement.setInt(1, conta.getNumero());
+//        preparedStatement.setBigDecimal(2, BigDecimal.ZERO);
+//        preparedStatement.setString(3, dadosDaConta.dadosCliente().nome());
+//        preparedStatement.setString(4, dadosDaConta.dadosCliente().cpf());
+//        preparedStatement.setString(5, dadosDaConta.dadosCliente().email());
+//        preparedStatement.execute();
+//        preparedStatement.close();
+//        conn.close();
+//    }
 
     public void abrir(DadosAberturaConta dadosDaConta) {
         var cliente = new Cliente(dadosDaConta.dadosCliente());
@@ -51,11 +70,10 @@ public class ContaService {
             preparedStatement.setString(3,dadosDaConta.dadosCliente().nome());
             preparedStatement.setString(4,dadosDaConta.dadosCliente().cpf());
             preparedStatement.setString(5,dadosDaConta.dadosCliente().email());
+            preparedStatement.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
     }
 
     public void realizarSaque(Integer numeroDaConta, BigDecimal valor) {

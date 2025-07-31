@@ -32,25 +32,6 @@ public class ContaService {
         return conta.getSaldo();
     }
 
-//    public void salvar(DadosAberturaConta dadosDaConta) throws SQLException {
-//        var cliente = new Cliente(dadosDaConta.dadosCliente());
-//        var conta = new Conta(dadosDaConta.numero(), BigDecimal.ZERO, cliente, true);
-//
-//        String sql = "INSERT INTO conta (numero, saldo, cliente_nome, cliente_cpf, cliente_email)"+
-//                "VALUES (?, ?, ?, ?, ?)";
-//
-//
-//        PreparedStatement preparedStatement = conn.prepareStatement(sql);
-//        preparedStatement.setInt(1, conta.getNumero());
-//        preparedStatement.setBigDecimal(2, BigDecimal.ZERO);
-//        preparedStatement.setString(3, dadosDaConta.dadosCliente().nome());
-//        preparedStatement.setString(4, dadosDaConta.dadosCliente().cpf());
-//        preparedStatement.setString(5, dadosDaConta.dadosCliente().email());
-//        preparedStatement.execute();
-//        preparedStatement.close();
-//        conn.close();
-//    }
-
     public void abrir(DadosAberturaConta dadosDaConta) {
         Connection conn = connection.recuperarConexao();
         new ContaDAO(conn).salvar(dadosDaConta);
@@ -65,7 +46,6 @@ public class ContaService {
         if (valor.compareTo(conta.getSaldo()) > 0) {
             throw new RegraDeNegocioException("Saldo insuficiente!");
         }
-
         conta.sacar(valor);
     }
 
@@ -74,7 +54,6 @@ public class ContaService {
         if (valor.compareTo(BigDecimal.ZERO) <= 0) {
             throw new RegraDeNegocioException("Valor do deposito deve ser superior a zero!");
         }
-
         conta.depositar(valor);
     }
 
@@ -83,7 +62,6 @@ public class ContaService {
         if (conta.possuiSaldo()) {
             throw new RegraDeNegocioException("Conta não pode ser encerrada pois ainda possui saldo!");
         }
-
         contas.remove(conta);
     }
 
